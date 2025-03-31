@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Discord bot using Gemini API",
   "main": "index.js",
+  "engines": {
+    "node": ">=16.9.0"
+  },
   "scripts": {
     "start": "node index.js"
   },
