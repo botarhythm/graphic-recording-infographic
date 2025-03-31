@@ -3,7 +3,7 @@ const { Client, GatewayIntentBits, Partials } = require('discord.js');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const character = require('./config/character');
 const ConversationHistory = require('./utils/conversationHistory');
-const BraveSearch = require('./utils/search');
+const WebSearch = require('./utils/webSearch');
 
 // 環境変数の確認
 console.log('Environment variables:');
@@ -11,7 +11,6 @@ console.log('PREFIX:', process.env.PREFIX);
 console.log('CHANNEL_ID:', process.env.CHANNEL_ID);
 console.log('GUILD_ID:', process.env.GUILD_ID);
 console.log('GEMINI_API_KEY:', process.env.GEMINI_API_KEY ? '設定されています' : '未設定です');
-console.log('BRAVE_API_KEY:', process.env.BRAVE_API_KEY ? '設定されています' : '未設定です');
 
 // Discordクライアントの初期化
 const client = new Client({
@@ -19,16 +18,9 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.DirectMessages,
-    GatewayIntentBits.GuildMessageReactions
+    GatewayIntentBits.DirectMessages
   ],
-  partials: [
-    Partials.Message,
-    Partials.Channel,
-    Partials.GuildMember,
-    Partials.Reaction
-  ]
+  partials: [Partials.Message, Partials.Channel, Partials.GuildMember]
 });
 
 // Gemini APIの初期化
@@ -52,8 +44,8 @@ try {
 // 会話履歴の初期化
 const conversationHistory = new ConversationHistory(10);
 
-// BraveSearchの初期化
-const braveSearch = new BraveSearch(process.env.BRAVE_API_KEY);
+// WebSearchの初期化
+const webSearch = new WebSearch();
 
 // ボットが準備できたときの処理
 client.once('ready', async () => {
@@ -125,56 +117,40 @@ client.on('messageCreate', async message => {
   console.log('Processing prompt:', prompt);
   
   try {
-    // タイピング中を表示
-    message.channel.sendTyping();
-    
-    if (!model) {
-      throw new Error('Gemini API is not initialized');
-    }
+    // 検索を実行
+    const searchResults = await webSearch.search(prompt);
+    const formattedSearchResults = webSearch.formatResults(searchResults);
 
-    // ユーザーのメッセージを履歴に追加
-    conversationHistory.addMessage(message.channel.id, 'user', prompt);
-
-    // 検索が必要かどうかを確認
-    const shouldSearch = prompt.includes('BraveSearchで検索して');
-    let searchResults = '';
-    
-    if (shouldSearch) {
-      try {
-        // 検索クエリから装飾文字を除去
-        const searchQuery = prompt
-          .replace('BraveSearchで検索して', '')
-          .replace(/[「」『』]/g, '')
-          .trim();
-        
-        if (!searchQuery) {
-          searchResults = '検索キーワードを指定してください。';
-        } else {
-          console.log('Executing search for:', searchQuery);
-          const results = await braveSearch.search(searchQuery);
-          searchResults = braveSearch.formatSearchResults(results);
-          console.log('Search results:', searchResults);
-        }
-      } catch (error) {
-        console.error('Search error:', error);
-        searchResults = '検索中にエラーが発生しました。';
-      }
-    }
-
-    // システムプロンプトと会話履歴、ユーザーのプロンプトを組み合わせる
+    // 会話履歴を取得
     const history = conversationHistory.getFormattedHistory(message.channel.id);
-    const fullPrompt = `${character.systemPrompt}\n\n会話履歴:\n${history}\n\n${searchResults ? `参考情報:\n${searchResults}\n\n` : ''}ユーザー: ${prompt}\n\n${character.name}:`;
     
-    // Gemini APIで応答を生成
-    const result = await model.generateContent(fullPrompt);
-    const response = await result.response;
-    const text = response.text();
+    // Gemini APIに送信するプロンプトを構築
+    const fullPrompt = `
+以下の会話履歴と検索結果を参考に、質問に答えてください。
+検索結果に基づいて、できるだけ具体的な情報を提供してください。
 
-    await message.reply(text);
-    conversationHistory.addMessage(message.channel.id, 'assistant', text);
+会話履歴:
+${history}
+
+検索結果:
+${formattedSearchResults}
+
+質問: ${prompt}
+
+回答:`;
+
+    // Gemini APIにリクエスト
+    const result = await model.generateContent(fullPrompt);
+    const response = result.response.text();
+
+    // 会話履歴に追加
+    conversationHistory.addMessage(message.channel.id, 'user', prompt);
+    conversationHistory.addMessage(message.channel.id, 'assistant', response);
+
+    await message.reply(response);
   } catch (error) {
-    console.error('Error details:', error);
-    await message.reply('申し訳ありません。エラーが発生しました。\n' + error.message);
+    console.error('Error processing prompt:', error);
+    await message.reply('申し訳ありません。エラーが発生しました。');
   }
 });
 
@@ -184,4 +160,43 @@ client.on('error', error => {
 });
 
 // ボットをログイン
-client.login(process.env.DISCORD_TOKEN); 
+client.login(process.env.DISCORD_TOKEN);
+
+async function processPrompt(prompt, channelId) {
+  try {
+    // 検索を実行
+    const searchResults = await webSearch.search(prompt);
+    const formattedSearchResults = webSearch.formatResults(searchResults);
+
+    // 会話履歴を取得
+    const history = conversationHistory.getFormattedHistory(channelId);
+    
+    // Gemini APIに送信するプロンプトを構築
+    const fullPrompt = `
+以下の会話履歴と検索結果を参考に、質問に答えてください。
+検索結果に基づいて、できるだけ具体的な情報を提供してください。
+
+会話履歴:
+${history}
+
+検索結果:
+${formattedSearchResults}
+
+質問: ${prompt}
+
+回答:`;
+
+    // Gemini APIにリクエスト
+    const result = await model.generateContent(fullPrompt);
+    const response = result.response.text();
+
+    // 会話履歴に追加
+    conversationHistory.addMessage(channelId, 'user', prompt);
+    conversationHistory.addMessage(channelId, 'assistant', response);
+
+    return response;
+  } catch (error) {
+    console.error('Error processing prompt:', error);
+    return '申し訳ありません。エラーが発生しました。';
+  }
+} 
