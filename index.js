@@ -47,6 +47,21 @@ const conversationHistory = new ConversationHistory(10);
 // WebSearchの初期化
 const webSearch = new WebSearch();
 
+// Glitch用の設定
+const port = process.env.PORT || 3000;
+const express = require('express');
+const app = express();
+
+// ヘルスチェック用のエンドポイント
+app.get('/', (req, res) => {
+  res.send('Bot is running!');
+});
+
+// サーバーを起動
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
 // ボットが準備できたときの処理
 client.once('ready', async () => {
   console.log(`Logged in as ${client.user.tag}!`);
