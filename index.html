@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GraphAI Discord Bot プロジェクト概要</title>
+    <meta name="gr-title" content="GraphAI Discord Bot プロジェクト概要">
+    <meta name="gr-description" content="GraphAI技術を活用したマルチモーダル対応のDiscord Botを開発するプロジェクトの概要">
+    <meta name="gr-category" content="tech">
+    <meta name="gr-tags" content="AI,Discord,Bot,GraphAI,マルチモーダル">
+    <meta name="gr-date" content="2025-04-09">
+    <meta name="gr-source" content="Notion">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol&family=Yomogi&family=Zen+Kurenaido&display=swap');
         
@@ -266,6 +272,48 @@
             background-color: var(--fashion-4);
             border-radius: 5px;
         }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: rgba(242, 230, 60, 0.1);
+            border-radius: 8px;
+        }
+        
+        .nav-button {
+            font-family: 'Yomogi', cursive;
+            background-color: var(--fashion-1);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--fashion-4);
+        }
+        
+        .nav-button::before {
+            margin-right: 5px;
+        }
+        
+        .catalog-button::before {
+            content: "📚";
+        }
+        
+        .github-button::before {
+            content: "💻";
+        }
+        
+        .guide-button::before {
+            content: "📝";
+        }
 
         @media (max-width: 900px) {
             .column {
@@ -282,6 +330,12 @@
 </head>
 <body>
     <div class="container">
+        <div class="nav-bar">
+            <a href="catalog.html" class="nav-button catalog-button">カタログを見る</a>
+            <a href="https://github.com/botarhythm/graphic-recording-infographic" class="nav-button github-button">GitHubリポジトリ</a>
+            <a href="community-guide.html" class="nav-button guide-button">コミュニティガイド</a>
+        </div>
+        
         <div class="header">
             <div class="title-container">
                 <h1 class="title">GraphAI Discord Bot プロジェクト概要</h1>
