@@ -1,81 +1,14 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bocchy（ボッチー） - AIアシスタント</title>
+    <title>Mindmap Test</title>
     <script src="https://cdn.jsdelivr.net/npm/d3@6"></script>
     <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.2.7"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol&family=Yomogi&family=Zen+Kurenaido&display=swap');
-        
-        :root {
-            --bocchi-1: #2D3748;
-            --bocchi-2: #90CDF4;
-            --bocchi-3: #4A5568;
-            --bocchi-4: #63B3ED;
-            --bocchi-5: #2B6CB0;
-            --text-main: #334155;
-            --text-heading: #1e40af;
-            --background: #ffffff;
-        }
-        
-        body {
-            font-family: 'Zen Kurenaido', sans-serif;
-            color: var(--text-main);
-            background-color: var(--background);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-        }
-
-        h1 {
-            font-family: 'Kaisei Decol', serif;
-            color: var(--text-heading);
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 1em;
-        }
-
-        #mindmap {
-            width: 100%;
-            height: 800px;
-            margin: 20px auto;
-            border: 1px solid var(--bocchi-2);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .nav-buttons {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .nav-button {
-            display: inline-block;
-            background-color: var(--bocchi-5);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            margin: 0 10px;
-            transition: background-color 0.3s ease;
-        }
-
-        .nav-button:hover {
-            background-color: var(--bocchi-4);
-        }
-    </style>
 </head>
 <body>
-    <h1>Bocchy 機能・コンセプト マインドマップ</h1>
-
-    <div class="nav-buttons">
-        <a href="guide.html" class="nav-button">使い方ガイド</a>
-    </div>
-
-    <div id="mindmap"></div>
-
+    <div id="mindmap" style="width: 100%; height: 800px;"></div>
     <script>
         const data = {
             "type": "root",
