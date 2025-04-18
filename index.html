@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bocchy（ボッチー） - AIアシスタント</title>
+    <title>Bocchy（ボッチー）- 機能とコンセプト紹介</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol&family=Yomogi&family=Zen+Kurenaido&display=swap');
         
@@ -117,7 +117,7 @@
         
         .cta-section {
             text-align: center;
-            margin: 80px 0;
+            margin: 60px 0;
             padding: 60px 20px;
             background-color: rgba(144, 205, 244, 0.1);
             border-radius: 20px;
@@ -198,62 +198,214 @@
                 margin: 0 20px;
             }
         }
+        
+        /* Add styles for new sections if needed */
+        .concept-section, .interaction-section, .tech-section {
+            margin: 60px 0;
+            padding: 40px;
+            background-color: rgba(237, 242, 247, 0.5); /* Light gray background */
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .section-title { /* Added for consistency in new sections */
+            font-family: 'Kaisei Decol', serif;
+            color: var(--bocchi-5);
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .interaction-methods {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .interaction-method {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            flex: 1;
+        }
+
+        .interaction-method h3 {
+            font-family: 'Kaisei Decol', serif;
+            color: var(--bocchi-4);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        /* Adjust existing styles slightly if needed */
+        .features {
+            margin-top: 20px; /* Reduce top margin */
+        }
+        .cta-section {
+             margin: 60px 0; /* Adjust margin */
+        }
+        .mindmap-section {
+            margin: 60px 0;
+             padding: 40px;
+             background-color: rgba(237, 242, 247, 0.5);
+             border-radius: 15px;
+        }
+        .mindmap-section .section-title { /* Reuse section-title style */
+             font-family: 'Kaisei Decol', serif;
+             color: var(--bocchi-5);
+             font-size: 28px;
+             margin-bottom: 20px;
+             text-align: center;
+             border-bottom: none; /* Remove border for this title */
+        }
     </style>
+    <!-- Markmap scripts and styles -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.14.3"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.14.3/dist/style.css">
 </head>
 <body>
     <section class="hero">
         <h1 class="hero-title">Bocchy（ボッチー）</h1>
-        <p class="hero-subtitle">静かな森の奥で、あなたの思考に寄り添うAIアシスタント</p>
+        <p class="hero-subtitle">あなたの思考プロセスに静かに寄り添う、AIアシスタントの機能紹介</p>
         <div class="nav-buttons">
             <a href="guide.html" class="nav-button">使い方ガイド</a>
-            <a href="catalog.html" class="nav-button">機能カタログ</a>
         </div>
     </section>
 
     <div class="container">
+        
+        <section class="concept-section">
+             <h2 class="section-title">ボッチーの心</h2>
+             <p>まるで静かな森の案内人のように、あなたの知的な探求や日々のタスクをやさしくサポートします。<br>
+                丁寧で親しみやすく、時には詩的な表現で、思考の伴走者となります。</p>
+        </section>
+
+        <h2 class="section-title" style="text-align:center; margin-top: 60px;">主な機能</h2>
         <div class="features">
             <div class="feature-card">
-                <div class="feature-icon">🌱</div>
-                <h2 class="feature-title">優しい対話</h2>
+                <div class="feature-icon">🧠</div>
+                <h2 class="feature-title">文脈を記憶する対話</h2>
                 <p class="feature-description">
-                    詩的で温かみのある言葉遣いで、
-                    あなたの思考に寄り添います。
+                    会話の流れを記憶し、文脈に沿った自然な対話を行います。あなたの意図を深く理解しようと努めます。
                 </p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🔍</div>
-                <h2 class="feature-title">知識の探求</h2>
+                <div class="feature-icon">📚</div>
+                <h2 class="feature-title">知識と検索(RAG)</h2>
                 <p class="feature-description">
-                    Web検索と豊富な知識ベースを活用して、
-                    深い洞察を提供します。
+                    豊富な知識ベースと最新のWeb検索(RAG)を組み合わせ、信頼性の高い情報を提供し、あなたの問いに応えます。
                 </p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">💫</div>
-                <h2 class="feature-title">創造的思考</h2>
+                <div class="feature-icon">🧩</div>
+                <h2 class="feature-title">モジュール設計</h2>
                 <p class="feature-description">
-                    新しい視点や発想を提案し、
-                    あなたの創造性を刺激します。
+                    拡張可能な機能(Handlers, Services)を備え、多様なタスクに柔軟に対応できるよう設計されています。
                 </p>
             </div>
         </div>
 
+        <section class="interaction-section">
+            <h2 class="section-title">ボッチーとの対話方法</h2>
+            <p>ボッチーとは、いくつかの方法でコミュニケーションをとることができます。</p>
+            <div class="interaction-methods">
+                <div class="interaction-method">
+                    <h3>@メンション</h3>
+                    <p>ボッチーに直接話しかけたい時、確実に呼びかけたい時に使います。</p>
+                </div>
+                <div class="interaction-method">
+                    <h3>DM</h3>
+                    <p>一対一で、より静かに、個人的な相談をしたい時に適しています。</p>
+                </div>
+                 <div class="interaction-method">
+                    <h3>自然参加</h3>
+                    <p>会話の流れを読み取り、必要な時にそっと対話に加わることもあります。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tech-section">
+             <h2 class="section-title">技術的な側面</h2>
+             <p>ボッチーはNode.jsを基盤とし、文脈管理(Context Manager)、知識ベース連携、各種サービスやハンドラを組み合わせたモジュール構造で動作しています。<br>これにより、柔軟性と拡張性を保ちながら、安定した対話体験を提供します。</p>
+        </section>
+
+
+        <!-- Mind Map Section -->
+        <section class="mindmap-section">
+            <h2 class="section-title">Bocchy 機能・コンセプト マインドマップ</h2>
+            <svg id="markmap" style="width: 100%; height: 500px;"></svg>
+        </section>
+
         <section class="cta-section">
-            <h2 class="cta-title">Bocchyと対話を始めましょう</h2>
+            <h2 class="cta-title">Bocchyとの対話を始めてみませんか？</h2>
             <p class="cta-description">
-                静かな森の奥で育まれた知性が、
-                あなたの知的探求をサポートします。
+                静かな森の案内人が、あなたの知的探求をサポートします。まずは使い方ガイドをご覧ください。
             </p>
-            <a href="guide.html" class="cta-button">使い方を見る</a>
+            <a href="guide.html" class="cta-button">使い方ガイドを見る</a>
         </section>
     </div>
 
     <footer>
         <div class="footer-links">
             <a href="guide.html" class="footer-link">使い方ガイド</a>
-            <a href="catalog.html" class="footer-link">機能カタログ</a>
         </div>
         <p>© 2024 Bocchy - AIアシスタント</p>
     </footer>
+
+    <!-- Markmap data and initialization script -->
+    <script type="text/template" id="markmap-data">
+        ---
+        markmap:
+          colorFreezeLevel: 2
+          initialExpandLevel: 1
+        ---
+
+        # Bocchy (AIアシスタント)
+
+        ## コンセプト: 静かな森の案内人
+        - 思考の伴走者
+        - 丁寧で親しみやすい対話
+        - 詩的な表現
+        - 協調性・サポート精神
+
+        ## 主要機能
+        - **対話エンジン**
+          - 文脈記憶 (Context Manager)
+          - 自然言語理解
+          - 時間認識
+        - **知識システム**
+          - 内部知識ベース
+          - Web検索連携 (RAG)
+          - 情報統合・要約
+        - **タスク実行**
+          - テキスト解析 (要約, 感情分析)
+          - コード支援 (質問応答, レビュー補助)
+          - 文書作成補助
+          - 情報整理・分類
+        - **拡張性**
+          - モジュール設計 (Handlers, Services)
+          - カスタマイズ可能
+
+        ## 対話インターフェース
+        - `@メンション`
+        - `ダイレクトメッセージ (DM)`
+        - `自然な会話参加`
+
+        ## 技術基盤
+        - Node.js
+        - 主要モジュール
+          - Context Manager
+          - Knowledge Service
+          - Handler Framework
+          - API Integrations
+        - 柔軟性と安定性の両立
+    </script>
+    <script>
+      const { Markmap, loadCSS, loadJS } = window.markmap;
+      const transformer = new markmap.Transformer();
+      const { root } = transformer.transform(document.getElementById('markmap-data').textContent);
+      Markmap.create('#markmap', { toolbar: true }, root);
+    </script>
 </body>
 </html>
