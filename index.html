@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bocchy（ボッチー） - AIアシスタント</title>
-    <script src="https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.14.3/dist/browser/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol&family=Yomogi&family=Zen+Kurenaido&display=swap');
         
@@ -37,7 +36,7 @@
             margin-bottom: 1em;
         }
 
-        #mindmap {
+        .mindmap-container {
             width: 100%;
             height: 800px;
             margin: 20px auto;
@@ -66,11 +65,6 @@
         .nav-button:hover {
             background-color: var(--bocchi-4);
         }
-
-        svg {
-            width: 100%;
-            height: 100%;
-        }
     </style>
 </head>
 <body>
@@ -80,10 +74,17 @@
         <a href="guide.html" class="nav-button">使い方ガイド</a>
     </div>
 
-    <div id="mindmap"></div>
+    <div class="mindmap-container">
+        <svg class="markmap" style="width: 100%; height: 100%;">
+            <g transform="translate(40,40)">
+                <text>Loading...</text>
+            </g>
+        </svg>
+    </div>
 
     <script>
-        const markdown = `
+        window.addEventListener('load', () => {
+            const markdown = `
 # Bocchy (AIアシスタント)
 
 ## コンセプト: 静かな森の案内人
@@ -115,21 +116,7 @@
 - ダイレクトメッセージ (DM)
 - 自然な会話参加
 `;
-
-        window.addEventListener('load', () => {
-            const { Transformer } = window.markmap;
-            const transformer = new Transformer();
-
-            const { root } = transformer.transform(markdown);
-            const { Markmap } = window;
-            const mm = Markmap.create('#mindmap', {
-                autoFit: true,
-                color: d3.scaleOrdinal(['#2B6CB0', '#63B3ED', '#90CDF4']),
-                nodeFont: 'Zen Kurenaido',
-                linkShape: 'diagonal',
-                paddingX: 16,
-                duration: 500,
-            }, root);
+            window.markmap.autoLoader.renderString(markdown, 'svg.markmap');
         });
     </script>
 </body>
