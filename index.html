@@ -403,15 +403,46 @@
         - 柔軟性と安定性の両立
     </script>
     <script>
-      const { Markmap, Transformer, loadCSS, loadJS } = window.markmap;
-      const transformer = new Transformer();
-      const { root, features } = transformer.transform(document.getElementById('markmap-data').textContent);
-      
-      const { styles, scripts } = transformer.getUsedAssets(features);
-      if (styles) loadCSS(styles);
-      if (scripts) loadJS(scripts, { getMarkmap: () => Markmap });
-      
-      Markmap.create('#markmap', { toolbar: true }, root);
+      document.addEventListener('DOMContentLoaded', () => {
+        try {
+          // Check if markmap libraries are loaded
+          if (!window.markmap || !window.markmap.Markmap || !window.markmap.Transformer) {
+            console.error('Markmap libraries not loaded correctly.');
+            return;
+          }
+          
+          const { Markmap, Transformer, loadCSS, loadJS } = window.markmap;
+          const transformer = new Transformer();
+          const svgEl = document.querySelector('#markmap');
+          const markmapDataEl = document.getElementById('markmap-data');
+
+          if (!svgEl) {
+              console.error('Markmap SVG element (#markmap) not found.');
+              return;
+          }
+          if (!markmapDataEl || !markmapDataEl.textContent) {
+              console.error('Markmap data element (#markmap-data) not found or empty.');
+              return;
+          }
+
+          const { root, features } = transformer.transform(markmapDataEl.textContent);
+
+          const { styles, scripts } = transformer.getUsedAssets(features);
+          // Ensure styles/scripts are arrays before loading
+          if (Array.isArray(styles) && styles.length) loadCSS(styles);
+          if (Array.isArray(scripts) && scripts.length) loadJS(scripts, { getMarkmap: () => Markmap });
+
+          // Clear the SVG element before creating a new map (optional, but good practice)
+          while (svgEl.firstChild) {
+            svgEl.removeChild(svgEl.firstChild);
+          }
+          
+          Markmap.create(svgEl, { toolbar: true }, root);
+          console.log('Markmap created successfully.');
+        } catch (e) {
+            console.error('Error creating Markmap:', e);
+        }
+      });
     </script>
 </body>
 </html>
