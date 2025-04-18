@@ -3,25 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bocchy（ボッチー） - AIアシスタント</title>
+    <title>デジタルDIYの技術探求記録</title>
     <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol&family=Yomogi&family=Zen+Kurenaido&display=swap');
         
         :root {
-            --bocchi-1: #2D3748;
-            --bocchi-2: #90CDF4;
-            --bocchi-3: #4A5568;
-            --bocchi-4: #63B3ED;
-            --bocchi-5: #2B6CB0;
-            --text-main: #334155;
-            --text-heading: #1e40af;
-            --background: #ffffff;
+            --main-color: #FF6B6B;
+            --sub-color-1: #4ECDC4;
+            --sub-color-2: #45B7AF;
+            --accent: #FFE66D;
+            --text: #2C3E50;
+            --background: #FFFFFF;
         }
         
         body {
             font-family: 'Zen Kurenaido', sans-serif;
-            color: var(--text-main);
+            color: var(--text);
             background-color: var(--background);
             margin: 0;
             padding: 20px;
@@ -30,20 +28,23 @@
 
         h1 {
             font-family: 'Kaisei Decol', serif;
-            color: var(--text-heading);
+            color: var(--main-color);
             text-align: center;
-            font-size: 2.5em;
+            font-size: 2em;
             margin-bottom: 1em;
+            padding: 10px;
+            border-bottom: 3px solid var(--main-color);
         }
 
         .mindmap-container {
             width: 100%;
             height: 800px;
             margin: 20px auto;
-            border: 1px solid var(--bocchi-2);
-            border-radius: 10px;
+            border: 2px solid var(--sub-color-1);
+            border-radius: 15px;
             overflow: hidden;
             background: var(--background);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .nav-buttons {
@@ -53,22 +54,24 @@
 
         .nav-button {
             display: inline-block;
-            background-color: var(--bocchi-5);
+            background-color: var(--sub-color-2);
             color: white;
             padding: 10px 20px;
             border-radius: 20px;
             text-decoration: none;
             margin: 0 10px;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .nav-button:hover {
-            background-color: var(--bocchi-4);
+            background-color: var(--main-color);
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
-    <h1>Bocchy 機能・コンセプト マインドマップ</h1>
+    <h1>デジタルDIYの技術探求記録</h1>
 
     <div class="nav-buttons">
         <a href="guide.html" class="nav-button">使い方ガイド</a>
@@ -85,36 +88,43 @@
     <script>
         window.addEventListener('load', () => {
             const markdown = `
-# Bocchy (AIアシスタント)
+# デジタルDIYの技術探求記録
 
-## コンセプト: 静かな森の案内人
-- 思考の伴走者
-- 丁寧で親しみやすい対話
-- 詩的な表現
-- 協調性・サポート精神
+## AI技術探求の旅
+- 最新のAI技術トレンド調査
+- プロンプトエンジニアリング実験
+- LLMの活用と限界の理解
+- AIツール開発プロジェクト
+  - 要件定義と設計
+  - プロトタイプ開発
+  - テスト・評価
 
-## 主要機能
+## AIモデルの進化
+- 大規模言語モデルの発展
+  - GPT-4の特徴と活用
+  - Claude 3の可能性
+  - Llama 2の実装検証
+- ファインチューニング実験
+- モデル評価と選定基準
 
-### 対話エンジン
-- 文脈記憶 (Context Manager)
-- 自然言語理解
-- 時間認識
+## AIとの対話とMRO理論
+- プロンプト設計の原則
+- コンテキスト管理の重要性
+- システムメッセージの最適化
+- 対話フローの設計
+- フィードバックループの構築
 
-### 知識システム
-- 内部知識ベース
-- Web検索連携 (RAG)
-- 情報統合・要約
+## 開発環境の整備
+- 開発ツールチェーンの構築
+- バージョン管理システム
+- CI/CDパイプライン設定
+- モニタリングと分析
 
-### タスク実行
-- テキスト解析 (要約, 感情分析)
-- コード支援 (質問応答, レビュー補助)
-- 文書作成補助
-- 情報整理・分類
-
-## 対話インターフェース
-- @メンション
-- ダイレクトメッセージ (DM)
-- 自然な会話参加
+## コミュニティ活動
+- オープンソースへの貢献
+- 技術共有とナレッジベース
+- コミュニティガイドライン
+- メンバー間の協力体制
 `;
             window.markmap.autoLoader.renderString(markdown, 'svg.markmap');
         });
