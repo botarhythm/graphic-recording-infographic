@@ -261,6 +261,7 @@
     </style>
     <!-- Markmap scripts and styles -->
     <script src="https://cdn.jsdelivr.net/npm/d3@6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.14.3"></script>
     <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.14.3"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.14.3/dist/style.css">
 </head>
@@ -402,9 +403,14 @@
         - 柔軟性と安定性の両立
     </script>
     <script>
-      const { Markmap, loadCSS, loadJS } = window.markmap;
-      const transformer = new markmap.Transformer();
-      const { root } = transformer.transform(document.getElementById('markmap-data').textContent);
+      const { Markmap, Transformer, loadCSS, loadJS } = window.markmap;
+      const transformer = new Transformer();
+      const { root, features } = transformer.transform(document.getElementById('markmap-data').textContent);
+      
+      const { styles, scripts } = transformer.getUsedAssets(features);
+      if (styles) loadCSS(styles);
+      if (scripts) loadJS(scripts, { getMarkmap: () => Markmap });
+      
       Markmap.create('#markmap', { toolbar: true }, root);
     </script>
 </body>
