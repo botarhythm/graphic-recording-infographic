@@ -9,17 +9,19 @@
         @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol&family=Yomogi&family=Zen+Kurenaido&display=swap');
         
         :root {
-            --main-color: #FF6B6B;
-            --sub-color-1: #4ECDC4;
-            --sub-color-2: #45B7AF;
-            --accent: #FFE66D;
-            --text: #2C3E50;
-            --background: #FFFFFF;
+            --bocchi-1: #2D3748;
+            --bocchi-2: #90CDF4;
+            --bocchi-3: #4A5568;
+            --bocchi-4: #63B3ED;
+            --bocchi-5: #2B6CB0;
+            --text-main: #334155;
+            --text-heading: #1e40af;
+            --background: #ffffff;
         }
         
         body {
             font-family: 'Zen Kurenaido', sans-serif;
-            color: var(--text);
+            color: var(--text-main);
             background-color: var(--background);
             margin: 0;
             padding: 20px;
@@ -28,23 +30,22 @@
 
         h1 {
             font-family: 'Kaisei Decol', serif;
-            color: var(--main-color);
+            color: var(--text-heading);
             text-align: center;
             font-size: 2em;
             margin-bottom: 1em;
             padding: 10px;
-            border-bottom: 3px solid var(--main-color);
+            border-bottom: 2px solid var(--bocchi-2);
         }
 
         .mindmap-container {
             width: 100%;
             height: 800px;
             margin: 20px auto;
-            border: 2px solid var(--sub-color-1);
-            border-radius: 15px;
+            border: 1px solid var(--bocchi-2);
+            border-radius: 10px;
             overflow: hidden;
             background: var(--background);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .nav-buttons {
@@ -54,19 +55,36 @@
 
         .nav-button {
             display: inline-block;
-            background-color: var(--sub-color-2);
+            background-color: var(--bocchi-5);
             color: white;
             padding: 10px 20px;
             border-radius: 20px;
             text-decoration: none;
             margin: 0 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
         }
 
         .nav-button:hover {
-            background-color: var(--main-color);
-            transform: translateY(-2px);
+            background-color: var(--bocchi-4);
+        }
+
+        /* マインドマップのスタイル調整 */
+        .markmap {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        .markmap-node {
+            cursor: pointer;
+        }
+        .markmap-node-circle {
+            fill: var(--bocchi-2);
+        }
+        .markmap-node-text {
+            fill: var(--text-main);
+            font-family: 'Zen Kurenaido', sans-serif;
+        }
+        .markmap-link {
+            stroke: var(--bocchi-3);
         }
     </style>
 </head>
@@ -78,7 +96,7 @@
     </div>
 
     <div class="mindmap-container">
-        <svg class="markmap" style="width: 100%; height: 100%;">
+        <svg class="markmap">
             <g transform="translate(40,40)">
                 <text>Loading...</text>
             </g>
@@ -91,40 +109,42 @@
 # デジタルDIYの技術探求記録
 
 ## AI技術探求の旅
-- 最新のAI技術トレンド調査
-- プロンプトエンジニアリング実験
-- LLMの活用と限界の理解
-- AIツール開発プロジェクト
-  - 要件定義と設計
-  - プロトタイプ開発
-  - テスト・評価
+### 最新のAI技術トレンド調査
+- GPT-4の特徴と活用
+- Claude 3の可能性
+- Llama 2の実装検証
 
-## AIモデルの進化
-- 大規模言語モデルの発展
-  - GPT-4の特徴と活用
-  - Claude 3の可能性
-  - Llama 2の実装検証
-- ファインチューニング実験
-- モデル評価と選定基準
-
-## AIとの対話とMRO理論
-- プロンプト設計の原則
-- コンテキスト管理の重要性
+### プロンプトエンジニアリング実験
 - システムメッセージの最適化
+- コンテキスト管理の重要性
 - 対話フローの設計
-- フィードバックループの構築
+
+### AIツール開発プロジェクト
+- 要件定義と設計
+- プロトタイプ開発
+- テスト・評価
 
 ## 開発環境の整備
-- 開発ツールチェーンの構築
+### 開発ツールチェーン
 - バージョン管理システム
-- CI/CDパイプライン設定
-- モニタリングと分析
+- CI/CDパイプライン
+- モニタリングツール
 
-## コミュニティ活動
-- オープンソースへの貢献
-- 技術共有とナレッジベース
-- コミュニティガイドライン
-- メンバー間の協力体制
+### コミュニティ活動
+- オープンソース貢献
+- 技術共有
+- メンバー間の協力
+
+## 実験と検証
+### ファインチューニング
+- データセット準備
+- モデル選定
+- 評価指標
+
+### フィードバックループ
+- ユーザーテスト
+- 性能分析
+- 改善サイクル
 `;
             window.markmap.autoLoader.renderString(markdown, 'svg.markmap');
         });
