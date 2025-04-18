@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bocchy（ボッチー） - AIアシスタント</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol&family=Yomogi&family=Zen+Kurenaido&display=swap');
+        
+        :root {
+            --bocchi-1: #2D3748;
+            --bocchi-2: #90CDF4;
+            --bocchi-3: #4A5568;
+            --bocchi-4: #63B3ED;
+            --bocchi-5: #2B6CB0;
+            --text-main: #334155;
+            --text-heading: #1e40af;
+            --background: #ffffff;
+        }
+        
+        body {
+            font-family: 'Yomogi', cursive;
+            color: var(--text-main);
+            background-color: var(--background);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-family: 'Kaisei Decol', serif;
+            color: var(--text-heading);
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 1em;
+        }
+
+        .mindmap-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .nav-button {
+            display: inline-block;
+            background-color: var(--bocchi-5);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background-color: var(--bocchi-4);
+        }
+    </style>
+</head>
+<body>
+    <h1>Bocchy 機能・コンセプト マインドマップ</h1>
+
+    <div class="nav-buttons">
+        <a href="guide.html" class="nav-button">使い方ガイド</a>
+    </div>
+
+    <div class="mindmap-container">
+        <pre class="mermaid">
+%%{init: {'theme': 'base', 'themeVariables': { 'fontFamily': 'Yomogi', 'fontSize': '16px', 'lineColor': '#63B3ED', 'mainBkg': '#ffffff', 'nodeBorder': '#2B6CB0', 'nodeTextColor': '#334155'}}}%%
+mindmap
+  root(("Bocchy<br/>ボッチー"))
+    ((静かな森の<br/>案内人))
+      )思考の伴走者(
+      )丁寧な対話(
+      )詩的な表現(
+      )協調性(
+    ((主要機能))
+      ((対話エンジン))
+        )文脈記憶(
+        )自然言語理解(
+        )時間認識(
+      ((知識システム))
+        )内部知識ベース(
+        )Web検索連携(
+        )情報統合・要約(
+      ((タスク実行))
+        )テキスト解析(
+        )コード支援(
+        )文書作成補助(
+        )情報整理(
+    ((インターフェース))
+      )@メンション(
+      )DM(
+      )自然な会話(
+        </pre>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            securityLevel: 'loose',
+            theme: 'base'
+        });
+    </script>
+</body>
+</html> 
