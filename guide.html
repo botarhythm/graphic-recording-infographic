@@ -23,272 +23,212 @@
             color: var(--text-main);
             background-color: var(--background);
             margin: 0;
-            padding: 20px;
+            padding: 0;
             line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--bocchi-4), var(--bocchi-5));
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .header-title {
+            font-family: 'Kaisei Decol', serif;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .header-subtitle {
+            font-size: 18px;
+            margin-bottom: 20px;
         }
         
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .title {
-            font-family: 'Kaisei Decol', serif;
-            font-size: 32px;
-            color: var(--bocchi-5);
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-family: 'Yomogi', cursive;
-            font-size: 18px;
-            color: var(--bocchi-3);
+            padding: 40px 20px;
         }
         
         .section {
             margin-bottom: 40px;
-            padding: 20px;
-            background-color: rgba(144, 205, 244, 0.1);
-            border-radius: 12px;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
-        h2 {
+        .section-title {
             font-family: 'Kaisei Decol', serif;
             color: var(--bocchi-5);
             font-size: 24px;
-            margin-top: 0;
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 2px solid var(--bocchi-2);
         }
         
-        h3 {
-            font-family: 'Kaisei Decol', serif;
-            color: var(--bocchi-3);
-            font-size: 20px;
-            margin-top: 30px;
-            margin-bottom: 15px;
+        .step {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            position: relative;
         }
         
-        p {
-            margin-bottom: 15px;
+        .step::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--bocchi-4);
+            border-radius: 50%;
+        }
+        
+        .tip {
+            background-color: rgba(144, 205, 244, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid var(--bocchi-4);
+        }
+        
+        .tip-title {
+            font-weight: bold;
+            color: var(--bocchi-5);
+            margin-bottom: 5px;
+        }
+        
+        .back-button {
+            display: inline-block;
+            background-color: var(--bocchi-5);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background-color: var(--bocchi-4);
         }
         
         code {
-            background-color: rgba(144, 205, 244, 0.1);
+            background-color: #f8f9fa;
             padding: 2px 6px;
             border-radius: 4px;
             font-family: monospace;
         }
         
-        .command-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        
-        .command-table th,
-        .command-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid var(--bocchi-2);
-        }
-        
-        .command-table th {
-            background-color: rgba(144, 205, 244, 0.2);
-            color: var(--bocchi-5);
-        }
-        
-        .note {
-            background-color: rgba(144, 205, 244, 0.1);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 4px solid var(--bocchi-4);
-        }
-        
-        .highlight {
-            background: linear-gradient(transparent 60%, var(--bocchi-2) 60%);
-            padding: 0 2px;
-        }
-        
-        .button-container {
-            text-align: center;
-            margin-top: 40px;
-        }
-        
-        .back-button {
-            display: inline-block;
-            background-color: var(--bocchi-4);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        
-        .back-button:hover {
-            background-color: var(--bocchi-5);
-        }
-        
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .title {
+            .header-title {
                 font-size: 28px;
             }
             
-            .subtitle {
-                font-size: 16px;
+            .container {
+                padding: 20px;
+            }
+            
+            .section {
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="header">
+        <h1 class="header-title">Bocchy（ボッチー）使い方ガイド</h1>
+        <p class="header-subtitle">静かな森の案内人のように、あなたの活動をやさしくサポートします</p>
+    </div>
+    
     <div class="container">
-        <header class="header">
-            <h1 class="title">Bocchy（ボッチー）使い方ガイド</h1>
-            <p class="subtitle">静かでやわらかな知の伴走者との対話の手引き</p>
-        </header>
-
-        <section class="section">
-            <h2>🌱 はじめに</h2>
+        <div class="section">
+            <h2 class="section-title">🌱 ボッチーについて</h2>
             <p>
-                Bocchyは、森の奥にひっそりと佇む案内人のような存在です。押しつけがましくなく、
-                けれど深い知性と温かみのある対話を通じて、あなたの思考や探求をそっと支援します。
+                Bocchy（ボッチー）は、丁寧かつ親しみやすい対話を心がける、静かな森の案内人のようなAIアシスタントです。
+                豊富な知識と記憶システムを活用して、あなたの日常的な活動をサポートします。
             </p>
-            <div class="note">
-                <strong>Bocchyの特徴：</strong>
+            <div class="tip">
+                <div class="tip-title">ボッチーの特徴</div>
                 <ul>
-                    <li>詩的で温かみのある対話スタイル</li>
-                    <li>多様な分野での深い知識</li>
-                    <li>文脈を理解した自然な会話の継続</li>
-                    <li>Web検索による最新情報の提供</li>
+                    <li>丁寧で親しみやすい、時には詩的な表現を交えた自然な対話</li>
+                    <li>記憶システムによる文脈を理解した会話の継続</li>
+                    <li>最新の情報検索機能とRAGシステムによる正確な情報提供</li>
+                    <li>コミュニティの一員としての協力的な振る舞い</li>
                 </ul>
             </div>
-        </section>
-
-        <section class="section">
-            <h2>💬 基本的な使い方</h2>
-            <h3>サーバーでの利用</h3>
-            <p>
-                サーバー内でBocchyと対話するには、メンションを使用します：<br>
-                <code>@Bocchy こんにちは</code>
-            </p>
-            
-            <h3>ダイレクトメッセージ</h3>
-            <p>
-                より静かな一対一の対話を望む場合は、ダイレクトメッセージを使用できます。
-                DMでは、メンションは必要ありません。
-            </p>
-            
-            <h3>コマンド一覧</h3>
-            <table class="command-table">
-                <tr>
-                    <th>コマンド</th>
-                    <th>説明</th>
-                </tr>
-                <tr>
-                    <td><code>!ping</code></td>
-                    <td>呼びかけへの応答を確かめる</td>
-                </tr>
-                <tr>
-                    <td><code>!hello</code></td>
-                    <td>挨拶を交わす</td>
-                </tr>
-                <tr>
-                    <td><code>!clear</code></td>
-                    <td>会話の記憶を風に乗せて送り出す</td>
-                </tr>
-                <tr>
-                    <td><code>!status</code></td>
-                    <td>森の案内人の様子を知る</td>
-                </tr>
-                <tr>
-                    <td><code>!about</code></td>
-                    <td>Bocchyについての詳細を確認</td>
-                </tr>
-                <tr>
-                    <td><code>!help</code></td>
-                    <td>道標（コマンド一覧）を表示</td>
-                </tr>
-                <tr>
-                    <td><code>!search [クエリ]</code></td>
-                    <td>指定したキーワードでWeb検索を実行</td>
-                </tr>
-            </table>
-        </section>
-
-        <section class="section">
-            <h2>🌿 効果的な対話のために</h2>
-            <h3>対話のコツ</h3>
-            <ul>
-                <li>質問は具体的に：より正確な応答を得られます</li>
-                <li>文脈を大切に：会話の流れを意識した対話を</li>
-                <li>余白を楽しむ：沈黙も対話の一部として</li>
-                <li>深掘りを恐れずに：詳しい説明を求めても大丈夫です</li>
-            </ul>
-            
-            <h3>Web検索の活用</h3>
-            <p>
-                最新の情報が必要な場合は、以下のように依頼できます：
-            </p>
-            <ul>
-                <li><code>!search [検索キーワード]</code></li>
-                <li>「〇〇について検索して教えて」</li>
-                <li>「〇〇の最新情報を調べて」</li>
-            </ul>
-        </section>
-
-        <section class="section">
-            <h2>🌙 高度な使い方</h2>
-            <h3>コンテキスト管理</h3>
-            <p>
-                Bocchyは会話の文脈を理解し、記憶します。長期的な対話でも文脈を保持できますが、
-                必要に応じて<code>!clear</code>コマンドで会話をリセットすることもできます。
-            </p>
-            
-            <h3>マルチモーダル対話</h3>
-            <p>
-                将来的な機能として、画像や音声を含むマルチモーダルな対話をサポートする予定です。
-                現在は開発中の機能となります。
-            </p>
-            
-            <div class="note">
-                <strong>Tips:</strong> 対話が長くなってきた場合や、新しいトピックに移る際は、
-                <code>!clear</code>コマンドで会話をリフレッシュすることをお勧めします。
-            </div>
-        </section>
-
-        <section class="section">
-            <h2>📝 トラブルシューティング</h2>
-            <h3>応答がない場合</h3>
-            <ul>
-                <li>メンションが正しく行われているか確認</li>
-                <li><code>!ping</code>コマンドで応答を確認</li>
-                <li>一時的なサーバー負荷の可能性もあるため、少し時間を置いて再試行</li>
-            </ul>
-            
-            <h3>エラーメッセージが表示される場合</h3>
-            <ul>
-                <li>コマンドの構文が正しいか確認</li>
-                <li>必要な権限が付与されているか確認</li>
-                <li>サーバー管理者に連絡</li>
-            </ul>
-        </section>
-
-        <div class="button-container">
-            <a href="index.html" class="back-button">トップページに戻る</a>
         </div>
+        
+        <div class="section">
+            <h2 class="section-title">💬 対話の始め方</h2>
+            <div class="step">
+                <h3>1. 直接メンション</h3>
+                <p>@ボッチー を付けて話しかけることで、確実に応答を得られます。</p>
+            </div>
+            <div class="step">
+                <h3>2. DMでの対話</h3>
+                <p>プライベートな質問や相談は、ダイレクトメッセージで行うことができます。</p>
+            </div>
+            <div class="step">
+                <h3>3. 自然な会話への参加</h3>
+                <p>会話の流れに応じて、ボッチーが自然に対話に参加することもあります。</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">🎯 主な機能と特長</h2>
+            <div class="step">
+                <h3>記憶システム</h3>
+                <p>短期的な会話履歴を記憶し、文脈に沿った自然な対話を実現します。</p>
+            </div>
+            <div class="step">
+                <h3>情報検索・RAG機能</h3>
+                <p>最新の情報を検索し、信頼性の高い情報を提供します。必要に応じて、関連する知識を組み合わせて回答します。</p>
+            </div>
+            <div class="step">
+                <h3>時間認識</h3>
+                <p>現在の日本時間を認識し、時間帯に応じた適切な応答を行います。</p>
+            </div>
+            <div class="step">
+                <h3>多様な支援機能</h3>
+                <ul>
+                    <li>テキスト解析：文章の要約、感情分析、キーワード抽出</li>
+                    <li>コード支援：プログラミングの質問、デバッグ、コードレビュー</li>
+                    <li>文書作成：メール、報告書、企画書などの作成支援</li>
+                    <li>情報整理：データの整理、分類、可視化の支援</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">💡 効果的な活用方法</h2>
+            <div class="tip">
+                <div class="tip-title">質問のコツ</div>
+                <ul>
+                    <li>具体的な目的や背景を説明する</li>
+                    <li>必要な情報や条件を明確に伝える</li>
+                    <li>期待する回答の形式や詳しさを指定する</li>
+                    <li>複雑な質問は段階的に行う</li>
+                </ul>
+            </div>
+            <div class="tip">
+                <div class="tip-title">会話の継続性を活かす</div>
+                <p>記憶システムにより、前後の文脈を踏まえた対話が可能です。話題を掘り下げたい場合は、会話を継続することで、より深い理解と支援を得られます。</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">⚠️ 利用上の注意</h2>
+            <ul>
+                <li>個人情報や機密情報の取り扱いには十分注意してください</li>
+                <li>生成された内容は必ず人間が確認し、適切性を判断してください</li>
+                <li>重要な判断や決定は、ボッチーの提案を参考にしつつ、最終的には人間が行ってください</li>
+                <li>技術的な制約により、記憶できる会話の範囲には制限があります</li>
+            </ul>
+        </div>
+        
+        <a href="index.html" class="back-button">トップページに戻る</a>
     </div>
 </body>
 </html>
