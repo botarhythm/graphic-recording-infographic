@@ -6,6 +6,7 @@
     <title>Bocchy（ボッチー） - AIアシスタント</title>
     <script src="https://cdn.jsdelivr.net/npm/d3@6"></script>
     <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.2.7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-common@0.14.2"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol&family=Yomogi&family=Zen+Kurenaido&display=swap');
         
@@ -44,6 +45,12 @@
             border: 1px solid var(--bocchi-2);
             border-radius: 10px;
             overflow: hidden;
+            background: var(--background);
+        }
+
+        .markmap-container {
+            height: 100%;
+            width: 100%;
         }
 
         .nav-buttons {
@@ -64,6 +71,24 @@
 
         .nav-button:hover {
             background-color: var(--bocchi-4);
+        }
+
+        /* マインドマップのスタイル調整 */
+        .markmap-node {
+            cursor: pointer;
+        }
+
+        .markmap-node-circle {
+            fill: var(--bocchi-4);
+        }
+
+        .markmap-node-text {
+            fill: var(--text-main);
+            font-family: 'Zen Kurenaido', sans-serif;
+        }
+
+        .markmap-link {
+            stroke: var(--bocchi-2);
         }
     </style>
 </head>
@@ -137,9 +162,17 @@
             ]
         };
 
-        window.addEventListener('load', () => {
-            const { Markmap } = window.markmap;
-            const mm = Markmap.create('#mindmap', null, data);
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const { Markmap } = window.markmap;
+                const mm = Markmap.create('#mindmap', {
+                    autoFit: true,
+                    color: (node) => node.type === 'root' ? '#2B6CB0' : '#63B3ED'
+                }, data);
+            } catch (error) {
+                console.error('マインドマップの初期化に失敗しました:', error);
+                document.getElementById('mindmap').innerHTML = '<p style="text-align: center; color: red;">マインドマップの読み込みに失敗しました。</p>';
+            }
         });
     </script>
 </body>
