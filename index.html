@@ -258,6 +258,14 @@
              text-align: center;
              border-bottom: none; /* Remove border for this title */
         }
+
+        /* Force visibility for Markmap SVG content */
+        #markmap,
+        #markmap g {
+            display: block !important; /* Ensure block display */
+            visibility: visible !important; /* Ensure visible */
+            opacity: 1 !important; /* Ensure not transparent */
+        }
     </style>
     <!-- Markmap scripts and styles -->
     <script src="https://cdn.jsdelivr.net/npm/d3@6"></script>
