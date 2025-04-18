@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI自動生成グラフィックレコーディングカタログ</title>
+    <title>Bocchy（ボッチー） - AIアシスタント</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol&family=Yomogi&family=Zen+Kurenaido&display=swap');
         
         :root {
-            --fashion-1: #593C47;
-            --fashion-2: #F2E63D;
-            --fashion-3: #F2C53D;
-            --fashion-4: #F25C05;
-            --fashion-5: #F24405;
+            --bocchi-1: #2D3748;
+            --bocchi-2: #90CDF4;
+            --bocchi-3: #4A5568;
+            --bocchi-4: #63B3ED;
+            --bocchi-5: #2B6CB0;
             --text-main: #334155;
             --text-heading: #1e40af;
             --background: #ffffff;
@@ -23,331 +23,72 @@
             color: var(--text-main);
             background-color: var(--background);
             margin: 0;
-            padding: 20px;
-            line-height: 1.4;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 3px solid var(--fashion-1);
-            padding-bottom: 15px;
-        }
-        
-        .title {
-            font-family: 'Kaisei Decol', serif;
-            font-size: 32px;
-            font-weight: bold;
-            margin: 0;
-            background: linear-gradient(to right, var(--fashion-1), var(--fashion-4));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-fill-color: transparent;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-family: 'Yomogi', cursive;
-            font-size: 16px;
-            color: var(--fashion-1);
-        }
-        
-        .intro-section {
-            background-color: rgba(242, 230, 60, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .intro-heading {
-            font-family: 'Kaisei Decol', serif;
-            font-size: 24px;
-            color: var(--fashion-5);
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-        
-        .intro-text {
-            margin-bottom: 20px;
-            font-size: 16px;
+            padding: 0;
             line-height: 1.6;
         }
         
-        .intro-highlight {
-            font-weight: bold;
-            background: linear-gradient(transparent 60%, var(--fashion-2) 60%);
-            padding: 0 2px;
-        }
-        
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .main-button {
-            display: inline-block;
-            background-color: var(--fashion-4);
+        .hero {
+            background: linear-gradient(135deg, var(--bocchi-4), var(--bocchi-5));
             color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            font-family: 'Yomogi', cursive;
-            box-shadow: 0 4px 6px rgba(242, 92, 5, 0.2);
-        }
-        
-        .main-button:hover {
-            background-color: var(--fashion-5);
-            transform: translateY(-2px);
-        }
-        
-        .category-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        
-        .category {
-            flex: 1;
-            min-width: 280px;
-        }
-        
-        .category-title {
-            font-family: 'Kaisei Decol', serif;
-            font-size: 20px;
-            color: var(--fashion-5);
-            margin-top: 0;
-            margin-bottom: 15px;
-            padding: 5px 10px;
-            background-color: rgba(242, 230, 60, 0.2);
-            border-radius: 20px;
+            padding: 100px 20px;
             text-align: center;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
-        .category-title::before {
-            content: attr(data-emoji);
-            margin-right: 8px;
-        }
-        
-        .card-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
-        }
-        
-        .card {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 2px solid var(--fashion-3);
-            backdrop-filter: blur(10px);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-        
-        .card-image {
-            width: 100%;
-            height: 150px;
-            background-color: var(--fashion-1);
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        
-        .card:hover .card-image img {
-            transform: scale(1.05);
-        }
-        
-        .card-content {
-            padding: 15px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .card-title {
+        .hero-title {
             font-family: 'Kaisei Decol', serif;
-            font-size: 18px;
-            color: var(--fashion-1);
-            margin-top: 0;
-            margin-bottom: 10px;
-            border-bottom: 2px dashed var(--fashion-2);
-            padding-bottom: 5px;
-        }
-        
-        .card-description {
-            font-size: 14px;
-            color: var(--text-main);
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-        
-        .tag-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-bottom: 15px;
-        }
-        
-        .tag {
-            display: inline-block;
-            background-color: var(--fashion-2);
-            color: var(--fashion-1);
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 12px;
-        }
-        
-        .card-button {
-            display: block;
-            text-align: center;
-            background-color: var(--fashion-4);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        
-        .card-button:hover {
-            background-color: var(--fashion-5);
-        }
-        
-        .search-bar {
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .search-input {
-            font-family: 'Zen Kurenaido', sans-serif;
-            padding: 10px 15px;
-            border: 2px solid var(--fashion-3);
-            border-radius: 20px;
-            width: 50%;
-            min-width: 280px;
-            font-size: 16px;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-        
-        .search-input:focus {
-            border-color: var(--fashion-4);
-        }
-        
-        .filter-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
+            font-size: 48px;
             margin-bottom: 20px;
-            flex-wrap: wrap;
         }
         
-        .filter-button {
+        .hero-subtitle {
             font-family: 'Yomogi', cursive;
-            background-color: var(--fashion-2);
-            color: var(--fashion-1);
-            border: none;
-            padding: 5px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-size: 24px;
+            opacity: 0.9;
         }
         
-        .filter-button.active {
-            background-color: var(--fashion-4);
-            color: white;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
         
-        .filter-button:hover {
-            background-color: var(--fashion-3);
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
         }
         
-        .footer {
-            font-size: 12px;
-            color: var(--fashion-1);
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 10px;
-            border-top: 1px dashed var(--fashion-3);
-        }
-        
-        .add-new-container {
-            text-align: center;
-            margin: 30px 0;
-        }
-        
-        .add-button {
-            display: inline-flex;
-            align-items: center;
-            background-color: var(--fashion-5);
-            color: white;
-            padding: 10px 20px;
+        .nav-button {
+            display: inline-block;
+            background-color: white;
+            color: var(--bocchi-5);
+            padding: 15px 30px;
             border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 4px 8px rgba(242, 68, 5, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
-        .add-button::before {
-            content: "➕";
-            margin-right: 8px;
-        }
-        
-        .add-button:hover {
-            background-color: #d63b04;
+        .nav-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(242, 68, 5, 0.4);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         
-        .features-grid {
+        .features {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
         }
         
         .feature-card {
             background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--fashion-3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
         
@@ -356,234 +97,163 @@
         }
         
         .feature-icon {
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--bocchi-5);
         }
         
         .feature-title {
             font-family: 'Kaisei Decol', serif;
-            color: var(--fashion-5);
+            color: var(--bocchi-5);
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-description {
+            color: var(--text-main);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin: 80px 0;
+            padding: 60px 20px;
+            background-color: rgba(144, 205, 244, 0.1);
+            border-radius: 20px;
+        }
+        
+        .cta-title {
+            font-family: 'Kaisei Decol', serif;
+            color: var(--bocchi-5);
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .cta-description {
+            color: var(--text-main);
             font-size: 18px;
-            margin-top: 0;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--bocchi-5);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--bocchi-4);
+        }
+        
+        footer {
+            background-color: var(--bocchi-1);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            opacity: 1;
         }
         
         @media (max-width: 768px) {
-            .category-container {
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .hero-subtitle {
+                font-size: 20px;
+            }
+            
+            .nav-buttons {
                 flex-direction: column;
+                align-items: center;
             }
             
-            .card-list {
-                grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
-            }
-            
-            .search-input {
-                width: 100%;
+            .feature-card {
+                margin: 0 20px;
             }
         }
     </style>
 </head>
 <body>
+    <section class="hero">
+        <h1 class="hero-title">Bocchy（ボッチー）</h1>
+        <p class="hero-subtitle">静かな森の奥で、あなたの思考に寄り添うAIアシスタント</p>
+        <div class="nav-buttons">
+            <a href="guide.html" class="nav-button">使い方ガイド</a>
+            <a href="catalog.html" class="nav-button">機能カタログ</a>
+        </div>
+    </section>
+
     <div class="container">
-        <div class="header">
-            <h1 class="title">AI自動生成グラフィックレコーディングカタログ</h1>
-            <div class="subtitle">完全自動化されたビジュアルコンテンツ生成・管理システム</div>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🌱</div>
+                <h2 class="feature-title">優しい対話</h2>
+                <p class="feature-description">
+                    詩的で温かみのある言葉遣いで、
+                    あなたの思考に寄り添います。
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h2 class="feature-title">知識の探求</h2>
+                <p class="feature-description">
+                    Web検索と豊富な知識ベースを活用して、
+                    深い洞察を提供します。
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💫</div>
+                <h2 class="feature-title">創造的思考</h2>
+                <p class="feature-description">
+                    新しい視点や発想を提案し、
+                    あなたの創造性を刺激します。
+                </p>
+            </div>
         </div>
-        
-        <div class="intro-section">
-            <h2 class="intro-heading">🚀 AIによる完全自動化ビジュアル変換システム</h2>
-            <p class="intro-text">
-                このプロジェクトは <span class="intro-highlight">AIによる自動化を最優先</span> するという哲学から生まれました。
-                Claudeなどの高度なAIを活用して、テキストコンテンツをグラフィックレコーディング風の視覚的に魅力的なインフォグラフィックに自動変換します。
-                HTMLの生成からGitHubでの公開、カタログ管理まで、すべてをAIが自動化します。
+
+        <section class="cta-section">
+            <h2 class="cta-title">Bocchyと対話を始めましょう</h2>
+            <p class="cta-description">
+                静かな森の奥で育まれた知性が、
+                あなたの知的探求をサポートします。
             </p>
-            <div class="button-container">
-                <a href="guide.html" class="main-button">📖 使い方ガイド</a>
-                <a href="https://github.com/botarhythm/graphic-recording-infographic/blob/main/PROMPT_TEMPLATE.md" class="main-button">🔍 プロンプトテンプレート</a>
-                <a href="https://github.com/botarhythm/graphic-recording-infographic" class="main-button">💻 GitHubリポジトリ</a>
-            </div>
-        </div>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🎨</div>
-                <h3 class="feature-title">自動ビジュアル化</h3>
-                <p>テキストコンテンツを手書き風のグラフィックレコーディングに自動変換します。</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📦</div>
-                <h3 class="feature-title">GitHubへの自動公開</h3>
-                <p>生成されたHTMLがGitHub Pagesで自動的に公開されます。</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🏷️</div>
-                <h3 class="feature-title">自動タグ付け・分類</h3>
-                <p>コンテンツが自動的にカテゴリ分けされ、タグ付けされます。</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔄</div>
-                <h3 class="feature-title">エンジニア不要</h3>
-                <p>専門的な技術知識なしで、高品質なビジュアルコンテンツを作成できます。</p>
-            </div>
-        </div>
-        
-        <div class="search-bar">
-            <input type="text" class="search-input" placeholder="タイトル、タグ、説明から検索..." id="search-input">
-        </div>
-        
-        <div class="filter-container">
-            <button class="filter-button active" data-filter="all">すべて</button>
-            <button class="filter-button" data-filter="tech">技術</button>
-            <button class="filter-button" data-filter="business">ビジネス</button>
-            <button class="filter-button" data-filter="design">デザイン</button>
-            <button class="filter-button" data-filter="education">教育</button>
-        </div>
-        
-        <div class="category-container">
-            <!-- 技術カテゴリ -->
-            <div class="category">
-                <h2 class="category-title" data-emoji="💻">技術</h2>
-                <div class="card-list">
-                    <div class="card" data-tags="AI,Discord,Bot,GraphAI,マルチモーダル">
-                        <div class="card-image">
-                            <img src="thumbnails/graphai-discord-bot.png" alt="GraphAI Discord Bot プロジェクト" onerror="this.src='https://via.placeholder.com/300x150/593C47/FFFFFF?text=GraphAI+Discord+Bot'">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">GraphAI Discord Bot プロジェクト</h3>
-                            <div class="card-description">
-                                GraphAI技術を活用したマルチモーダル対応のDiscord Botを開発するプロジェクトの概要
-                            </div>
-                            <div class="tag-container">
-                                <span class="tag">AI</span>
-                                <span class="tag">Discord</span>
-                                <span class="tag">GraphAI</span>
-                                <span class="tag">マルチモーダル</span>
-                            </div>
-                            <a href="content/tech/graphai-discord-bot.html" class="card-button">表示</a>
-                        </div>
-                    </div>
-                    
-                    <!-- 技術カテゴリの追加コンテンツはここに追加 -->
-                </div>
-            </div>
-            
-            <!-- ビジネスカテゴリ -->
-            <div class="category">
-                <h2 class="category-title" data-emoji="💼">ビジネス</h2>
-                <div class="card-list">
-                    <!-- コンテンツがない場合のプレースホルダー -->
-                    <div class="card placeholder">
-                        <div class="card-content" style="text-align: center; padding: 30px 15px;">
-                            <p>現在このカテゴリにはコンテンツがありません</p>
-                            <p>下のボタンから新しいグラフィックレコーディングを追加できます</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="category-container">
-            <!-- デザインカテゴリ -->
-            <div class="category">
-                <h2 class="category-title" data-emoji="🎨">デザイン</h2>
-                <div class="card-list">
-                    <!-- コンテンツがない場合のプレースホルダー -->
-                    <div class="card placeholder">
-                        <div class="card-content" style="text-align: center; padding: 30px 15px;">
-                            <p>現在このカテゴリにはコンテンツがありません</p>
-                            <p>下のボタンから新しいグラフィックレコーディングを追加できます</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 教育カテゴリ -->
-            <div class="category">
-                <h2 class="category-title" data-emoji="📚">教育</h2>
-                <div class="card-list">
-                    <!-- コンテンツがない場合のプレースホルダー -->
-                    <div class="card placeholder">
-                        <div class="card-content" style="text-align: center; padding: 30px 15px;">
-                            <p>現在このカテゴリにはコンテンツがありません</p>
-                            <p>下のボタンから新しいグラフィックレコーディングを追加できます</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="add-new-container">
-            <a href="guide.html#create-new" class="add-button">新しいグラフィックレコーディングを追加</a>
-        </div>
-        
-        <div class="footer">
-            <p>© 2025 AI自動生成グラフィックレコーディングカタログ | 完全自動化されたビジュアルコンテンツ生成・管理システム</p>
-            <p>このプロジェクトは<span class="intro-highlight">AIによる自動化を最優先</span>するという哲学から生まれました</p>
-        </div>
+            <a href="guide.html" class="cta-button">使い方を見る</a>
+        </section>
     </div>
-    
-    <script>
-        // 検索機能の実装
-        document.getElementById('search-input').addEventListener('input', function(e) {
-            const searchQuery = e.target.value.toLowerCase();
-            const cards = document.querySelectorAll('.card');
-            
-            cards.forEach(card => {
-                if (card.classList.contains('placeholder')) return;
-                
-                const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
-                const description = card.querySelector('.card-description')?.textContent.toLowerCase() || '';
-                const tags = card.dataset.tags?.toLowerCase() || '';
-                
-                if (title.includes(searchQuery) || description.includes(searchQuery) || tags.includes(searchQuery)) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-            
-            // カテゴリが空になった場合のプレースホルダー表示
-            document.querySelectorAll('.category').forEach(category => {
-                const visibleCards = category.querySelectorAll('.card:not([style*="display: none"])').length;
-                const placeholder = category.querySelector('.placeholder');
-                
-                if (placeholder) {
-                    if (visibleCards === 0) {
-                        placeholder.style.display = '';
-                    } else {
-                        placeholder.style.display = 'none';
-                    }
-                }
-            });
-        });
-        
-        // フィルター機能の実装
-        const filterButtons = document.querySelectorAll('.filter-button');
-        filterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // アクティブなボタンのスタイルを変更
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                const filter = this.dataset.filter;
-                const categories = document.querySelectorAll('.category');
-                
-                if (filter === 'all') {
-                    categories.forEach(category => {
-                        category.style.display = '';
-                    });
-                } else {
-                    categories.forEach(category => {
-                        const categoryTitle = category.querySelector('.category-title').textContent.toLowerCase();
-                        if (categoryTitle.includes(filter)) {
-                            category.style.display = '';
-                        } else {
-                            category.style.display = 'none';
-                        }
-                    });
-                }
-            });
-        });
-    </script>
+
+    <footer>
+        <div class="footer-links">
+            <a href="guide.html" class="footer-link">使い方ガイド</a>
+            <a href="catalog.html" class="footer-link">機能カタログ</a>
+        </div>
+        <p>© 2024 Bocchy - AIアシスタント</p>
+    </footer>
 </body>
 </html>
