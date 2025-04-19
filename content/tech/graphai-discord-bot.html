@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GraphAI Discord Bot プロジェクト概要</title>
+    <meta name="gr-title" content="GraphAI Discord Bot プロジェクト概要">
+    <meta name="gr-description" content="GraphAI技術を活用したマルチモーダル対応のDiscord Botを開発するプロジェクトの概要">
+    <meta name="gr-category" content="tech">
+    <meta name="gr-tags" content="AI,Discord,Bot,GraphAI,マルチモーダル">
+    <meta name="gr-date" content="2025-04-09">
+    <meta name="gr-source" content="Notion">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol&family=Yomogi&family=Zen+Kurenaido&display=swap');
+        
+        :root {
+            --fashion-1: #593C47;
+            --fashion-2: #F2E63D;
+            --fashion-3: #F2C53D;
+            --fashion-4: #F25C05;
+            --fashion-5: #F24405;
+            --text-main: #334155;
+            --text-heading: #1e40af;
+            --background: #ffffff;
+        }
+        
+        body {
+            font-family: 'Zen Kurenaido', sans-serif;
+            color: var(--text-main);
+            background-color: var(--background);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.4;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--fashion-1);
+            padding-bottom: 15px;
+        }
+        
+        .title-container {
+            flex: 1;
+        }
+        
+        .title {
+            font-family: 'Kaisei Decol', serif;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+            background: linear-gradient(to right, var(--fashion-1), var(--fashion-4));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+            padding-right: 20px;
+        }
+        
+        .date {
+            font-family: 'Yomogi', cursive;
+            font-size: 14px;
+            color: var(--fashion-1);
+            text-align: right;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .column {
+            flex: 1;
+            min-width: calc(33% - 20px);
+        }
+        
+        .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid var(--fashion-3);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        
+        .card-header {
+            font-family: 'Kaisei Decol', serif;
+            font-size: 18px;
+            color: var(--fashion-1);
+            margin-top: 0;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px dashed var(--fashion-2);
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-header::before {
+            content: "✏️";
+            margin-right: 8px;
+        }
+        
+        .section-title {
+            font-family: 'Kaisei Decol', serif;
+            font-size: 20px;
+            color: var(--fashion-5);
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 5px;
+            background-color: rgba(242, 230, 60, 0.2);
+            border-radius: 20px;
+        }
+        
+        .keyword {
+            font-weight: bold;
+            background: linear-gradient(transparent 60%, var(--fashion-2) 60%);
+            padding: 0 2px;
+        }
+        
+        .handdrawn-box {
+            border: 3px solid var(--fashion-4);
+            border-radius: 15px;
+            padding: 10px;
+            margin: 10px 0;
+            position: relative;
+        }
+        
+        .handdrawn-box::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background-color: white;
+            padding: 0 10px;
+            font-family: 'Yomogi', cursive;
+            color: var(--fashion-4);
+        }
+        
+        .arrow {
+            position: relative;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 24px;
+            color: var(--fashion-3);
+        }
+        
+        .bubble {
+            position: relative;
+            background: rgba(242, 196, 60, 0.2);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .bubble::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-top-color: rgba(242, 196, 60, 0.2);
+            border-bottom: 0;
+            margin-bottom: -10px;
+        }
+        
+        .list-item {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 8px;
+        }
+        
+        .list-item::before {
+            content: "🔍";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .phase {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .phase-tag {
+            font-family: 'Yomogi', cursive;
+            background-color: var(--fashion-1);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-right: 10px;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .phase-content {
+            flex: 1;
+        }
+        
+        .connection-line {
+            border-left: 2px dashed var(--fashion-3);
+            margin-left: 40px;
+            padding-left: 20px;
+            min-height: 30px;
+        }
+        
+        .emoji-bullet {
+            margin-right: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: var(--fashion-2);
+            color: var(--fashion-1);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .footer {
+            font-size: 12px;
+            color: var(--fashion-1);
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--fashion-3);
+        }
+
+        .handdrawn-arrow {
+            position: relative;
+            height: 30px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .handdrawn-arrow::after {
+            content: "→";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: var(--fashion-4);
+        }
+
+        .resource-meter {
+            height: 10px;
+            background-color: #e2e8f0;
+            border-radius: 5px;
+            margin-top: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-meter-fill {
+            height: 100%;
+            background-color: var(--fashion-4);
+            border-radius: 5px;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: rgba(242, 230, 60, 0.1);
+            border-radius: 8px;
+        }
+        
+        .nav-button {
+            font-family: 'Yomogi', cursive;
+            background-color: var(--fashion-1);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--fashion-4);
+        }
+        
+        .nav-button::before {
+            margin-right: 5px;
+        }
+        
+        .catalog-button::before {
+            content: "📚";
+        }
+        
+        .github-button::before {
+            content: "💻";
+        }
+        
+        .guide-button::before {
+            content: "📝";
+        }
+
+        @media (max-width: 900px) {
+            .column {
+                min-width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .column {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="../../index.html" class="nav-button catalog-button">カタログに戻る</a>
+            <a href="https://github.com/botarhythm/graphic-recording-infographic" class="nav-button github-button">GitHubリポジトリ</a>
+            <a href="../../guide.html" class="nav-button guide-button">使い方ガイド</a>
+        </div>
+        
+        <div class="header">
+            <div class="title-container">
+                <h1 class="title">GraphAI Discord Bot プロジェクト概要</h1>
+            </div>
+            <div class="date">
+                2024年7月 〜 🚀
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <!-- 左側カラム -->
+            <div class="column">
+                <h2 class="section-title">📋 プロジェクト概要</h2>
+                
+                <div class="card">
+                    <h3 class="card-header">目的</h3>
+                    <div class="bubble">
+                        GraphAI技術を活用したマルチモーダル対応のDiscord Botを開発するプロジェクト
+                    </div>
+                    <div class="list-item">
+                        <span class="keyword">GraphAIデータフロー</span>プログラミングモデルの実践的学習
+                    </div>
+                    <div class="list-item">
+                        複数のAIサービス（Gemini、OpenAI、Recraft等）の連携
+                    </div>
+                    <div class="list-item">
+                        テキスト・画像処理を含む<span class="keyword">マルチモーダル</span>な対話システム構築
+                    </div>
+                    <div class="list-item">
+                        <span class="keyword">コスト効率</span>の良いAIアプリケーションの設計と運用
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-header">主要コンポーネント</h3>
+                    <div class="handdrawn-box">
+                        <div style="font-weight:bold; color:var(--fashion-5);">🔄 GraphAI</div>
+                        非同期データフロー実行エンジン（コアフレームワーク）
+                    </div>
+                    <div class="handdrawn-arrow"></div>
+                    <div class="handdrawn-box">
+                        <div style="font-weight:bold; color:var(--fashion-5);">💬 Discord.js</div>
+                        Discord APIとの連携
+                    </div>
+                    <div class="handdrawn-arrow"></div>
+                    <div class="handdrawn-box">
+                        <div style="font-weight:bold; color:var(--fashion-5);">🧠 Gemini API</div>
+                        主要LLMエンジン（無料枠活用）
+                    </div>
+                    <div class="handdrawn-arrow"></div>
+                    <div class="handdrawn-box">
+                        <div style="font-weight:bold; color:var(--fashion-5);">🤖 OpenAI API</div>
+                        補助LLMエンジン（GPT-4o-mini等、一部機能で使用）
+                    </div>
+                    <div class="handdrawn-arrow"></div>
+                    <div class="handdrawn-box">
+                        <div style="font-weight:bold; color:var(--fashion-5);">🎨 Recraft API</div>
+                        画像生成エンジン（日50枚無料枠活用）
+                    </div>
+                    <div class="handdrawn-arrow"></div>
+                    <div class="handdrawn-box">
+                        <div style="font-weight:bold; color:var(--fashion-5);">☁️ Glitch</div>
+                        ホスティング環境
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-header">システムアーキテクチャ</h3>
+                    <div style="text-align: center; margin: 15px 0;">
+                        <div style="font-family:'Yomogi'; font-size:16px; color:var(--fashion-1);">🏗️ コンポーネント構成 🏗️</div>
+                        <svg width="100%" height="200" viewBox="0 0 300 200">
+                            <rect x="10" y="10" width="280" height="50" rx="10" ry="10" fill="#F2E63D" stroke="#593C47" stroke-width="2" stroke-dasharray="5,5" />
+                            <text x="150" y="40" font-family="Yomogi" font-size="16" fill="#593C47" text-anchor="middle">GraphAI エンジン</text>
+                            
+                            <rect x="10" y="80" width="80" height="40" rx="10" ry="10" fill="#F2C53D" stroke="#593C47" stroke-width="2" />
+                            <text x="50" y="105" font-family="Yomogi" font-size="12" fill="#593C47" text-anchor="middle">Discord.js</text>
+                            
+                            <rect x="110" y="80" width="80" height="40" rx="10" ry="10" fill="#F2C53D" stroke="#593C47" stroke-width="2" />
+                            <text x="150" y="105" font-family="Yomogi" font-size="12" fill="#593C47" text-anchor="middle">Gemini API</text>
+                            
+                            <rect x="210" y="80" width="80" height="40" rx="10" ry="10" fill="#F2C53D" stroke="#593C47" stroke-width="2" />
+                            <text x="250" y="105" font-family="Yomogi" font-size="12" fill="#593C47" text-anchor="middle">OpenAI API</text>
+                            
+                            <rect x="110" y="140" width="80" height="40" rx="10" ry="10" fill="#F2C53D" stroke="#593C47" stroke-width="2" />
+                            <text x="150" y="165" font-family="Yomogi" font-size="12" fill="#593C47" text-anchor="middle">Recraft API</text>
+                            
+                            <!-- 接続線 -->
+                            <path d="M50 80 L50 60" stroke="#F25C05" stroke-width="2" />
+                            <path d="M150 80 L150 60" stroke="#F25C05" stroke-width="2" />
+                            <path d="M250 80 L250 60" stroke="#F25C05" stroke-width="2" />
+                            <path d="M150 140 L150 120" stroke="#F25C05" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div class="bubble">
+                        GraphAIを用いた<span class="keyword">データフロー型</span>のアーキテクチャを採用し、状態管理や非同期処理をシンプルに実装します。
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 中央カラム -->
+            <div class="column">
+                <h2 class="section-title">🛠️ 機能設計</h2>
+                
+                <div class="card">
+                    <h3 class="card-header">基本対話機能</h3>
+                    <div class="bubble">
+                        ユーザーの入力に対してLLMを用いた自然な会話を実現する基本的な機能
+                    </div>
+                    <div class="list-item">
+                        質問の内容に応じた柔軟な応答
+                    </div>
+                    <div class="list-item">
+                        会話履歴の管理と文脈の維持
+                    </div>
+                    <div class="list-item">
+                        「/help」、「/clear」などの基本的なコマンド
+                    </div>
+                    <div class="handdrawn-box">
+                        <div style="font-weight:bold;">実装方法:</div>
+                        <div class="tag">Gemini-2.0-flash</div> 主要なLLMとして使用<br>
+                        <div class="tag">GPT-4o-mini</div> 必要に応じてルーティング
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-header">マルチモーダル処理</h3>
+                    <div class="bubble">
+                        画像を含むメッセージの処理と理解を行う機能
+                    </div>
+                    <div class="list-item">
+                        画像付きメッセージの解釈と説明
+                    </div>
+                    <div class="list-item">
+                        画像に関する質問への回答
+                    </div>
+                    <div class="handdrawn-box">
+                        <div style="font-weight:bold;">実装方法:</div>
+                        <div class="tag">マルチモーダル</div> Gemini/GPT-4o-miniの機能活用<br>
+                        <div class="tag">自動検出</div> Discordからの画像添付を処理
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-header">画像生成機能</h3>
+                    <div class="bubble">
+                        テキストプロンプトから画像を生成しDiscordに投稿する機能
+                    </div>
+                    <div class="list-item">
+                        「!image」コマンドによる画像生成
+                    </div>
+                    <div class="list-item">
+                        生成枚数管理と使用状況の表示
+                    </div>
+                    <div class="list-item">
+                        プロンプト最適化と生成品質の向上
+                    </div>
+                    <div class="handdrawn-box">
+                        <div style="font-weight:bold;">実装方法:</div>
+                        <div class="tag">Recraft API</div> 日50枚無料枠を活用<br>
+                        <div class="tag">プロンプト最適化</div> LLMを使用<br>
+                        <div class="tag">使用回数追跡</div> 制限機能の実装
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-header">APIリソース管理</h3>
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span><span class="emoji-bullet">🧠</span>Gemini API</span>
+                            <span>無料枠活用</span>
+                        </div>
+                        <div class="resource-meter">
+                            <div class="resource-meter-fill" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span><span class="emoji-bullet">🤖</span>OpenAI API</span>
+                            <span>従量課金制</span>
+                        </div>
+                        <div class="resource-meter">
+                            <div class="resource-meter-fill" style="width: 20%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span><span class="emoji-bullet">🎨</span>Recraft API</span>
+                            <span>日50枚無料</span>
+                        </div>
+                        <div class="resource-meter">
+                            <div class="resource-meter-fill" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右側カラム -->
+            <div class="column">
+                <h2 class="section-title">📅 プロジェクト管理</h2>
+                
+                <div class="card">
+                    <h3 class="card-header">開発ロードマップ</h3>
+                    <div class="phase">
+                        <div class="phase-tag">フェーズ1</div>
+                        <div class="phase-content">
+                            <div style="font-weight:bold;">設計と基本機能実装</div>
+                            <div style="font-size:12px; color:var(--fashion-1);">2024年7月 - 2024年8月</div>
+                        </div>
+                    </div>
+                    <div class="connection-line">
+                        <div class="list-item">GraphAIデータフロー設計</div>
+                        <div class="list-item">Discord.js連携と基本対話機能実装</div>
+                        <div class="list-item">Gemini API連携の初期構築</div>
+                    </div>
+                    
+                    <div class="phase">
+                        <div class="phase-tag">フェーズ2</div>
+                        <div class="phase-content">
+                            <div style="font-weight:bold;">マルチモーダル機能開発</div>
+                            <div style="font-size:12px; color:var(--fashion-1);">2024年9月 - 2024年10月</div>
+                        </div>
+                    </div>
+                    <div class="connection-line">
+                        <div class="list-item">画像処理・分析機能の実装</div>
+                        <div class="list-item">Recraft APIによる画像生成機能</div>
+                        <div class="list-item">使用回数管理機能の実装</div>
+                    </div>
+                    
+                    <div class="phase">
+                        <div class="phase-tag">フェーズ3</div>
+                        <div class="phase-content">
+                            <div style="font-weight:bold;">最適化と安定化</div>
+                            <div style="font-size:12px; color:var(--fashion-1);">2024年11月 - </div>
+                        </div>
+                    </div>
+                    <div class="connection-line">
+                        <div class="list-item">パフォーマンス最適化</div>
+                        <div class="list-item">ユーザーフィードバックに基づく改善</div>
+                        <div class="list-item">コードのリファクタリングと整理</div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-header">GitHub統合</h3>
+                    <div style="text-align: center; margin: 10px 0;">
+                        <div style="border: 2px solid var(--fashion-1); border-radius: 8px; padding: 8px; display: inline-block;">
+                            <span style="font-family: 'Kaisei Decol'; color: var(--fashion-5);">リポジトリ URL:</span><br>
+                            <a href="https://github.com/botarhythm/graphai-discord" style="color: var(--fashion-4); word-break: break-all;">
+                                https://github.com/botarhythm/graphai-discord
+                            </a>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <span class="keyword">ブランチ戦略:</span> Git Flowに基づくブランチ管理
+                    </div>
+                    <div class="list-item">
+                        <span class="keyword">CI/CD:</span> GitHub Actionsによる自動テストとデプロイ
+                    </div>
+                    <div class="list-item">
+                        <span class="keyword">構造:</span> モジュール化コードベースとGraphAI定義ファイルの分離
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-header">Claudeトークン管理</h3>
+                    <div class="bubble">
+                        Claudeのトークン消費を最小限に抑える三つのアプローチ
+                    </div>
+                    <div class="handdrawn-box">
+                        <div style="font-weight:bold; color:var(--fashion-5);">💼 MCPの効率的活用</div>
+                        ClaudeのMCP機能を使用して複数のツール呼び出しを一括実行
+                    </div>
+                    <div class="handdrawn-box">
+                        <div style="font-weight:bold; color:var(--fashion-5);">💾 GitHubへのコード保存</div>
+                        生成されたコードや設計文書をGitHubに保存し、再生成を回避
+                    </div>
+                    <div class="handdrawn-box">
+                        <div style="font-weight:bold; color:var(--fashion-5);">📝 Notionとの連携</div>
+                        開発状況や意思決定をNotionに記録し、コンテキストを維持
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            出典: Notion ページ（2024年7月） | グラフィックレコーディング風インフォグラフィック
+        </div>
+    </div>
+</body>
+</html>

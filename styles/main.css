@@ -1,0 +1,129 @@
+:root {
+    --fashion-1: #593C47;
+    --fashion-2: #F2E63D;
+    --fashion-3: #F2C53D;
+    --fashion-4: #F25C05;
+    --fashion-5: #F24405;
+    --text-primary: #334155;
+    --text-secondary: #475569;
+    --text-heading: #1e40af;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Zen Kurenaido', sans-serif;
+    color: var(--text-primary);
+    line-height: 1.4;
+    background: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.title {
+    font-family: 'Kaisei Decol', serif;
+    font-size: 32px;
+    background: linear-gradient(45deg, var(--fashion-1), var(--fashion-4));
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+}
+
+.date {
+    font-family: 'Yomogi', cursive;
+    color: var(--text-secondary);
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-family: 'Kaisei Decol', serif;
+    color: var(--text-heading);
+    font-size: 18px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+h2::before {
+    content: '📝';
+}
+
+.main-features h2::before {
+    content: '✨';
+}
+
+.usage h2::before {
+    content: '📖';
+}
+
+ul, ol {
+    padding-left: 1.5rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+.guide-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--fashion-4);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.guide-link:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .content {
+        grid-template-columns: 1fr;
+    }
+    
+    .header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .title {
+        font-size: 24px;
+    }
+} 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindmap Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/d3@6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.2.7"></script>
+</head>
+<body>
+    <div id="mindmap" style="width: 100%; height: 800px;"></div>
+    <script>
+        const data = {
+            "type": "root",
+            "content": "Bocchy (AIアシスタント)",
+            "children": [
+                {
+                    "type": "heading",
+                    "content": "コンセプト: 静かな森の案内人",
+                    "children": [
+                        { "type": "list_item", "content": "思考の伴走者" },
+                        { "type": "list_item", "content": "丁寧で親しみやすい対話" },
+                        { "type": "list_item", "content": "詩的な表現" },
+                        { "type": "list_item", "content": "協調性・サポート精神" }
+                    ]
+                },
+                {
+                    "type": "heading",
+                    "content": "主要機能",
+                    "children": [
+                        {
+                            "type": "heading",
+                            "content": "対話エンジン",
+                            "children": [
+                                { "type": "list_item", "content": "文脈記憶 (Context Manager)" },
+                                { "type": "list_item", "content": "自然言語理解" },
+                                { "type": "list_item", "content": "時間認識" }
+                            ]
+                        },
+                        {
+                            "type": "heading",
+                            "content": "知識システム",
+                            "children": [
+                                { "type": "list_item", "content": "内部知識ベース" },
+                                { "type": "list_item", "content": "Web検索連携 (RAG)" },
+                                { "type": "list_item", "content": "情報統合・要約" }
+                            ]
+                        },
+                        {
+                            "type": "heading",
+                            "content": "タスク実行",
+                            "children": [
+                                { "type": "list_item", "content": "テキスト解析 (要約, 感情分析)" },
+                                { "type": "list_item", "content": "コード支援 (質問応答, レビュー補助)" },
+                                { "type": "list_item", "content": "文書作成補助" },
+                                { "type": "list_item", "content": "情報整理・分類" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "heading",
+                    "content": "対話インターフェース",
+                    "children": [
+                        { "type": "list_item", "content": "@メンション" },
+                        { "type": "list_item", "content": "ダイレクトメッセージ (DM)" },
+                        { "type": "list_item", "content": "自然な会話参加" }
+                    ]
+                }
+            ]
+        };
+
+        window.addEventListener('load', () => {
+            const { Markmap } = window.markmap;
+            const mm = Markmap.create('#mindmap', null, data);
+        });
+    </script>
+</body>
+</html> 

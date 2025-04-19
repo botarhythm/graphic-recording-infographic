@@ -1,0 +1,7 @@
+title: グラフィックレコーディング インフォグラフィック
+description: テキストコンテンツをグラフィックレコーディング風のインフォグラフィックに自動変換し、GitHubで公開・管理するAI自動化ワークフローシステム
+url: https://botarhythm.github.io/graphic-recording-infographic/
+baseurl: /graphic-recording-infographic
+show_downloads: false
+google_analytics:
+theme: jekyll-theme-cayman 

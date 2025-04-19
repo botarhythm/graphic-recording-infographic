@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>デジタルDIYの技術探求記録</title>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol&family=Yomogi&family=Zen+Kurenaido&display=swap');
+        
+        :root {
+            --bocchi-1: #2D3748;
+            --bocchi-2: #90CDF4;
+            --bocchi-3: #4A5568;
+            --bocchi-4: #63B3ED;
+            --bocchi-5: #2B6CB0;
+            --text-main: #334155;
+            --text-heading: #1e40af;
+            --background: #ffffff;
+        }
+        
+        body {
+            font-family: 'Zen Kurenaido', sans-serif;
+            color: var(--text-main);
+            background-color: var(--background);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-family: 'Kaisei Decol', serif;
+            color: var(--text-heading);
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 1em;
+            padding: 10px;
+            border-bottom: 2px solid var(--bocchi-2);
+        }
+
+        .mindmap-container {
+            width: 100%;
+            height: 800px;
+            margin: 20px auto;
+            border: 1px solid var(--bocchi-2);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--background);
+        }
+
+        .nav-buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .nav-button {
+            display: inline-block;
+            background-color: var(--bocchi-5);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background-color: var(--bocchi-4);
+        }
+
+        /* マインドマップのスタイル調整 */
+        .markmap {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        .markmap-node {
+            cursor: pointer;
+        }
+        .markmap-node-circle {
+            fill: var(--bocchi-2);
+        }
+        .markmap-node-text {
+            fill: var(--text-main);
+            font-family: 'Zen Kurenaido', sans-serif;
+        }
+        .markmap-link {
+            stroke: var(--bocchi-3);
+        }
+    </style>
+</head>
+<body>
+    <h1>デジタルDIYの技術探求記録</h1>
+
+    <div class="nav-buttons">
+        <a href="guide.html" class="nav-button">使い方ガイド</a>
+    </div>
+
+    <div class="mindmap-container">
+        <svg class="markmap">
+            <g transform="translate(40,40)">
+                <text>Loading...</text>
+            </g>
+        </svg>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const markdown = `
+# デジタルDIYの技術探求記録
+
+## AI技術探求の旅
+### 最新のAI技術トレンド調査
+- GPT-4の特徴と活用
+- Claude 3の可能性
+- Llama 2の実装検証
+
+### プロンプトエンジニアリング実験
+- システムメッセージの最適化
+- コンテキスト管理の重要性
+- 対話フローの設計
+
+### AIツール開発プロジェクト
+- 要件定義と設計
+- プロトタイプ開発
+- テスト・評価
+
+## 開発環境の整備
+### 開発ツールチェーン
+- バージョン管理システム
+- CI/CDパイプライン
+- モニタリングツール
+
+### コミュニティ活動
+- オープンソース貢献
+- 技術共有
+- メンバー間の協力
+
+## 実験と検証
+### ファインチューニング
+- データセット準備
+- モデル選定
+- 評価指標
+
+### フィードバックループ
+- ユーザーテスト
+- 性能分析
+- 改善サイクル
+`;
+            window.markmap.autoLoader.renderString(markdown, 'svg.markmap');
+        });
+    </script>
+</body>
+</html> 
