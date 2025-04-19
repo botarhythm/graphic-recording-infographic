@@ -13,9 +13,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;500;700&family=Yomogi&family=Zen+Kurenaido&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/d3@6"></script>
-    <script src="https://cdn.jsdelivr.net/npm/markmap-view"></script>
-    <script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.14.3/dist/browser/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@0.15.0"></script>
     <link rel="stylesheet" href="styles/main.css">
     <style>
         :root {
@@ -347,13 +347,9 @@
 #### 多言語対応
             `;
 
-            // markmapのレンダリング方法を修正
-            const { Transformer } = window.markmap;
-            const { Markmap } = window.markmap.view;
-            
-            const transformer = new Transformer();
-            const { root } = transformer.transform(markdown);
-            const mm = Markmap.create('#markmap', null, root);
+            // markmapのレンダリング方法を最新の方法に更新
+            // markmap-autoloaderを使用
+            window.markmap.autoLoader.render('#markmap', markdown);
         });
     </script>
 </body>
