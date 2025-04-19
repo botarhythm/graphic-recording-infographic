@@ -346,34 +346,62 @@
         // マインドマップをレンダリング
         window.addEventListener('load', () => {
             try {
-                if (!window.markmap) {
-                    console.error('markmap ライブラリが読み込まれていません');
+                if (typeof window.markmap === 'undefined' || typeof window.markmap.autoLoader === 'undefined') {
+                    console.error('markmap ライブラリが読み込まれていないか、適切に初期化されていません');
                     document.getElementById('markmap-container').innerHTML = 
-                        '<div style="color:red;padding:20px;">マインドマップの読み込みに失敗しました。ページをリロードしてください。</div>';
+                        '<div style="color:red;padding:20px;">マインドマップの読み込みに失敗しました。ページをリロードしてください。<br>エラー: markmap ライブラリが見つかりません</div>';
                     return;
                 }
                 
-                // 最新のAPIでマインドマップを作成
-                window.markmap.autoLoader.create(
-                    document.getElementById('markmap-container'), 
-                    markdownContent,
-                    {
-                        autoFit: true,
-                        color: (node) => {
-                            // ノードの深さに応じて色を変える
-                            const colors = [
-                                '#F25C05', // Level 0
-                                '#593C47', // Level 1
-                                '#F2C53D', // Level 2
-                                '#F24405', // Level 3
-                                '#F2E63D'  // Level 4
-                            ];
-                            return colors[Math.min(node.depth, colors.length - 1)];
-                        }
-                    }
-                );
+                // ライブラリのバージョンを確認
+                console.log('markmap version:', window.markmap.version);
                 
-                console.log('マインドマップが正常に初期化されました');
+                // 適切なAPIを使用
+                if (typeof window.markmap.autoLoader.renderString === 'function') {
+                    // 0.14.x 以前のバージョン
+                    window.markmap.autoLoader.renderString(
+                        markdownContent, 
+                        document.getElementById('markmap-container'),
+                        { 
+                            autoFit: true,
+                            color: d => {
+                                const colors = [
+                                    '#F25C05', // Level 0
+                                    '#593C47', // Level 1
+                                    '#F2C53D', // Level 2
+                                    '#F24405', // Level 3
+                                    '#F2E63D'  // Level 4
+                                ];
+                                return colors[Math.min(d.depth, colors.length - 1)];
+                            }
+                        }
+                    );
+                } else if (typeof window.markmap.autoLoader.create === 'function') {
+                    // 0.15.x 以降のバージョン
+                    window.markmap.autoLoader.create(
+                        document.getElementById('markmap-container'), 
+                        markdownContent,
+                        {
+                            autoFit: true,
+                            color: (node) => {
+                                const colors = [
+                                    '#F25C05', // Level 0
+                                    '#593C47', // Level 1
+                                    '#F2C53D', // Level 2
+                                    '#F24405', // Level 3
+                                    '#F2E63D'  // Level 4
+                                ];
+                                return colors[Math.min(node.depth, colors.length - 1)];
+                            }
+                        }
+                    );
+                } else {
+                    console.error('対応するmarkmap APIメソッドが見つかりません');
+                    document.getElementById('markmap-container').innerHTML = 
+                        '<div style="color:red;padding:20px;">マインドマップの読み込みに失敗しました。<br>エラー: 対応するAPIが見つかりません</div>';
+                }
+                
+                console.log('マインドマップの初期化を試みました');
             } catch (error) {
                 console.error('マインドマップの初期化エラー:', error);
                 document.getElementById('markmap-container').innerHTML = 
