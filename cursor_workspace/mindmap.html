@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="description" content="Bocchy（ボッチー）AIアシスタントの技術マインドマップ。機能や設計思想の全体像を視覚的に把握できます。">
+    <meta name="keywords" content="Bocchy, ボッチー, AIアシスタント, マインドマップ, 機能一覧">
+    <meta name="author" content="botarhythm">
+    <title>マインドマップ | Bocchy（ボッチー）AIアシスタント</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;500;700&family=Yomogi&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@0.15.3"></script>
+    <style>
+        :root {
+            --bocchi-1: #593C47;
+            --bocchi-2: #F2E63D;
+            --bocchi-3: #F2C53D;
+            --bocchi-4: #F25C05;
+            --bocchi-5: #F24405;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --text-heading: #1e293b;
+            --background: #fffbe9;
+            --card-bg: #ffffffcc;
+            --card-shadow: 0 4px 16px rgba(89,59,70,0.08);
+            --highlight-bg: #fffde7;
+            --border-radius: 12px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Yomogi', 'Zen Kurenaido', sans-serif;
+            color: var(--text-main);
+            background: var(--background);
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+
+        /* ===== ヘッダーセクション ===== */
+        .header-container {
+            position: relative;
+            background: linear-gradient(45deg, var(--bocchi-1), #724555);
+            color: white;
+            padding: 40px 5% 80px;
+            text-align: center;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .header-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1.5" fill="%23ffffff22"/></svg>');
+            background-size: 30px 30px;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            margin: 0 auto 15px;
+            width: 90px;
+            height: 90px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .logo-inner {
+            width: 78px;
+            height: 78px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--bocchi-3), var(--bocchi-4));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Kaisei Decol', serif;
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .header-title {
+            font-family: 'Kaisei Decol', serif;
+            font-size: 42px;
+            font-weight: bold;
+            margin: 10px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header-subtitle {
+            font-family: 'Zen Kurenaido', sans-serif;
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* ===== ナビゲーション ===== */
+        .nav-buttons {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            margin: -40px 0 30px;
+        }
+
+        .nav-button {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--bocchi-3), var(--bocchi-4));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 24px;
+            text-decoration: none;
+            margin: 0 8px 10px;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(242,92,5,0.25);
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: linear-gradient(90deg, var(--bocchi-2), var(--bocchi-5));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(242,92,5,0.35);
+        }
+
+        .nav-button.active {
+            background: linear-gradient(90deg, var(--bocchi-5), var(--bocchi-1));
+        }
+
+        /* ===== メインコンテンツ ===== */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .mindmap-container {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 30px;
+            margin-bottom: 40px;
+            min-height: 600px;
+            position: relative;
+        }
+
+        .mindmap-description {
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 1.7;
+            background: var(--highlight-bg);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 6px solid var(--bocchi-2);
+        }
+
+        /* ===== フッター ===== */
+        .footer {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 14px;
+            margin: 40px auto 0;
+            max-width: 1200px;
+            padding: 20px;
+            border-top: 1px dashed var(--bocchi-3);
+        }
+
+        /* ===== レスポンシブデザイン ===== */
+        @media (max-width: 900px) {
+            .header-title {
+                font-size: 32px;
+            }
+            
+            .header-subtitle {
+                font-size: 16px;
+            }
+            
+            .nav-button {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-container {
+                padding: 30px 5% 70px;
+            }
+            
+            .logo {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .logo-inner {
+                width: 60px;
+                height: 60px;
+                font-size: 22px;
+            }
+            
+            .nav-buttons {
+                margin-top: -25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダーセクション -->
+    <div class="header-container">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-inner">B</div>
+            </div>
+            <h1 class="header-title">ボッチー マインドマップ</h1>
+            <p class="header-subtitle">機能と設計思想の全体像を視覚的に把握できるマインドマップです</p>
+        </div>
+    </div>
+
+    <!-- ナビゲーション -->
+    <div class="nav-buttons">
+        <a href="index.html" class="nav-button">ホーム</a>
+        <a href="guide.html" class="nav-button">使い方ガイド</a>
+        <a href="tech.html" class="nav-button">技術解説</a>
+        <a href="history.html" class="nav-button">開発履歴</a>
+        <a href="mindmap.html" class="nav-button active">マインドマップ</a>
+    </div>
+
+    <!-- メインコンテンツ -->
+    <div class="main-content">
+        <div class="mindmap-description">
+            このマインドマップは、ボッチーの主要機能、内部構造、技術的特徴を視覚的に整理したものです。各ノードをクリックして展開したり折りたたんだりできます。マウスホイールでズームイン・アウトも可能です。
+        </div>
+        
+        <div class="mindmap-container">
+            <div id="markmap-container" style="width:100%; height:600px;"></div>
+        </div>
+    </div>
+
+    <!-- フッター -->
+    <div class="footer">
+        <p>© 2025 Bocchy（ボッチー） AIアシスタント | グラフィックレコーディング風インフォグラフィック</p>
+    </div>
+
+    <script>
+        // マインドマップの内容をMarkdownで定義
+        const markdownContent = `
+# Bocchy（ボッチー）AIアシスタント
+
+## 基本機能
+- ### 会話機能
+  - 自然な対話
+  - 複数ターンでの会話履歴保持
+  - パーソナリティ：やさしく丁寧
+- ### Web検索連携
+  - Google Custom Search API活用
+  - 検索範囲の最適化
+  - 検索結果の要約と引用
+- ### 会話履歴管理
+  - 直近のやり取りの文脈理解
+  - 長期記憶データベース非依存
+  - 会話の流れを把握
+
+## 技術構成
+- ### フロントエンド
+  - React
+  - 対話型インターフェース
+  - レスポンシブデザイン
+- ### バックエンド
+  - Node.js
+  - Express
+  - メッセージ処理ロジック
+- ### AI連携
+  - OpenAI API
+  - GPT-4トークン最適化
+  - プロンプト設計
+- ### 検索連携
+  - Google Custom Search
+  - 検索判定ロジック
+  - 検索結果の解析
+
+## 設計理念
+- ### シンプルさ
+  - 最小限の依存関係
+  - 明快な処理フロー
+  - メンテナンス性重視
+- ### ユーザー中心
+  - 人間らしい応答
+  - 使いやすさ優先
+  - 情報提供の正確性
+- ### 透明性
+  - 検索結果の引用明示
+  - 情報源の表示
+  - 推論過程の説明
+
+## 開発履歴
+- ### Phase 1
+  - 基本対話機能
+  - シンプルなプロンプト
+  - ベース構造設計
+- ### Phase 2
+  - Web検索連携
+  - コンテキスト管理改善
+  - 検索判定ロジック実装
+- ### Phase 3
+  - RAG機能実験
+  - パフォーマンス最適化
+  - RAG廃止と機能集約
+
+## 将来展望
+- ### 機能拡張
+  - 画像認識
+  - 音声インターフェース
+  - ドキュメント生成
+- ### インテグレーション
+  - カレンダー連携
+  - タスク管理
+  - ノート作成支援
+- ### パーソナライズ
+  - ユーザープロファイル
+  - 学習・適応機能
+  - カスタマイズ設定
+        `;
+
+        // マインドマップをレンダリング
+        window.addEventListener('load', () => {
+            try {
+                if (!window.markmap) {
+                    console.error('markmap ライブラリが読み込まれていません');
+                    document.getElementById('markmap-container').innerHTML = 
+                        '<div style="color:red;padding:20px;">マインドマップの読み込みに失敗しました。ページをリロードしてください。</div>';
+                    return;
+                }
+                
+                // 最新のAPIでマインドマップを作成
+                window.markmap.autoLoader.create(
+                    document.getElementById('markmap-container'), 
+                    markdownContent,
+                    {
+                        autoFit: true,
+                        color: (node) => {
+                            // ノードの深さに応じて色を変える
+                            const colors = [
+                                '#F25C05', // Level 0
+                                '#593C47', // Level 1
+                                '#F2C53D', // Level 2
+                                '#F24405', // Level 3
+                                '#F2E63D'  // Level 4
+                            ];
+                            return colors[Math.min(node.depth, colors.length - 1)];
+                        }
+                    }
+                );
+                
+                console.log('マインドマップが正常に初期化されました');
+            } catch (error) {
+                console.error('マインドマップの初期化エラー:', error);
+                document.getElementById('markmap-container').innerHTML = 
+                    `<div style="color:red;padding:20px;">マインドマップの読み込みに失敗しました: ${error.message}</div>`;
+            }
+        });
+    </script>
+</body>
+</html> 
